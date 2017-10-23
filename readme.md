@@ -7,5 +7,5 @@
 1. https://tutorial.djangogirls.org/ko/ <- Djnago 이해하기
 2. https://wikidocs.net/book/1 <- 파이썬 이해하기
 
-# 1. 사용법
+## 1. 사용법
  
