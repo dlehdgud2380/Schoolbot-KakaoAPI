@@ -55,6 +55,9 @@ https://github.com/plusfriend/auto_reply
 ## 2\. 필수 패키지 설치 및 세팅
 서버 구동에 필수적으로 요구되는 라이브러리입니다. 
 ```
+pip3 install -r requirements.txt 
+(위 명령어로 설치안될 경우 아래 명령어로 설치)
+
 pip3 install django && pip3 install Pillow && pip3 install bs4
 ```
 django: 봇 서버를 구동시켜주는 파이썬 웹프레임워크
