@@ -1,4 +1,4 @@
-﻿from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.shortcuts import render
 from yhbot.models import School_Info
@@ -7,7 +7,12 @@ from urllib.request import urlopen
 import json, datetime
 import re
 
+#자세한건 깃허브의 readme.md를 꼭 읽어주세요
 
+url_educationoffice = ''#예를 들어 서울이면 stu.sen.go.kr
+schulCode = ''#학교코드
+chulCrseScCode =  ''# 1 = 유치원, 2 =초등학교, 3 = 중학교, 4 = 고등학교
+schulKndScCode =  ''# 01 = 유치원, 02 = 초등학교, 03 = 중학교, 04 = 고등학교
 
 def keyboard(request):#자동응답 버튼입니다
     
@@ -19,6 +24,7 @@ def keyboard(request):#자동응답 버튼입니다
 
 @csrf_exempt
 def answer(request):
+    
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     selected_keyboard = received_json_data["content"]
@@ -276,51 +282,54 @@ def answer(request):
 
 #나이스에서 학교 급식을 정보를 크롤링 해옵니다.
 def meal_parser(): 
-
-    url = 'http://stu.sen.go.kr/sts_sci_md00_001.do?schulCode=B100000505&schulCrseScCode=4&schulKndScCode=04' #나이스에 있는 급식 파트 부분을 불러옵니다. 해당 학교의 고유 schulCode, schulCrseScCode, schulKndScCode가 필요합니다.
+    #나이스에 있는 급식 파트 부분을 불러옵니다. 해당 학교의 고유 schulCode, schulCrseScCode, schulKndScCode가 필요합니다.
+    url = 'http://' + url_educationoffice + '/sts_sci_md01_001.do?schulCode='+ schulCode +'&schulCrseScCode='+ schulCrseScCode +'&schulKndScCode=' + schulKndScCode
     with urlopen(url) as resp:
         html = resp.read()
-
+    data = ""
     soup = BeautifulSoup(html, 'html.parser')
     table_tag = soup.find('table', {'class': 'tbl_type3 tbl_calendar'})
-    listed_text = []
-
-    for td_tag in table_tag.find_all('td'):
-        div_tag = td_tag.find('div')
-        text = div_tag.text
-        if text.strip():
-            listed_text.append(text)
-
-    now = datetime.datetime.now()
-    nowdate = now.strftime('%d')
-    nowtime = int(now.strftime('%H'))
-
-    today_meal = ""
-    lunch = ""
-    dinner = ""
-
-    if nowdate[0] == 0 :
-        today_meal = listed_text[int(nowdate[1])-1]
-    else :
-        today_meal = listed_text[int(nowdate)-1]
-
-    if "[중식]" in today_meal :
-        lunch = today_meal[today_meal.index("[중식]"):today_meal.index("[석식]")]
-        dinner = today_meal[today_meal.index("[석식]"):]
-
+    if table_tag == None:
+        data = "정보없음"
     else:
-        lunch = "정보없음"
-        dinner = "정보없음"
+        listed_text = []
 
-    data = "\n#중식정보\n\n"+ lunch + "\n\n----------------------------\n\n#석식정보\n\n" + dinner
+        for td_tag in table_tag.find_all('td'):
+            div_tag = td_tag.find('div')
+            text = div_tag.text
+            if text.strip():
+                listed_text.append(text)
 
-    return (data)
+        now = datetime.datetime.now()
+        nowdate = now.strftime('%d')
+        nowtime = int(now.strftime('%H'))
+
+        today_meal = ""
+        lunch = ""
+        dinner = ""
+
+        if nowdate[0] == 0 :
+            today_meal = listed_text[int(nowdate[1])-1]
+        else :
+            today_meal = listed_text[int(nowdate)-1]
+
+        if "[중식]" in today_meal :
+            lunch = today_meal[today_meal.index("[중식]"):today_meal.index("[석식]")]
+            dinner = today_meal[today_meal.index("[석식]"):]
+
+        else:
+            lunch = "정보없음"
+            dinner = "정보없음"
+
+        data = "\n#중식정보\n\n"+ lunch + "\n\n----------------------------\n\n#석식정보\n\n" + dinner
+
+return (data)
 
 
-#학교홈페이지에서 학교 일정을 정보를 크롤링 해옵니다.
+#나이스에서 해당하는 학교의 일정 정보를 크롤링 해옵니다.
 def schoolschedule_parser():
 
-    url = 'http://www.younghoon.hs.kr/76439/subMenu.do' #학교 가정통신문 주소를 입력 해주세요.
+    url = 'http://' + url_educationoffice + '/sts_sci_md00_001.do?schulCode='+ schulCode +'&schulCrseScCode='+ schulCrseScCode +'&schulKndScCode=' + schulKndScCode
     with urlopen(url) as resp:
         html = resp.read()
         
@@ -329,13 +338,16 @@ def schoolschedule_parser():
 
     info = []
 
-    for td_tag in table_tag.find_all('td'):
-        text = td_tag.text.replace("\n\n", "") 
+    for div_tag in table_tag.find_all('div'):
+        text = div_tag.text.replace("\n\n", "") 
     
         if text.strip():
             info.append(text)
-    
-    return(info)
+
+    num = 0
+    for text in info:        
+        return(info[num])
+        num = num + 1
 
 # schoolschedule_parser() 함수의 리턴값을 가져와 오늘의 급식정보만 정규식을 통해 가공합니다.
 def schoolschedule_today():
@@ -390,5 +402,5 @@ def schoolinfo_loader(list_num):
 # 가정통신문 사진을 불러옴
 def schoolinfo_imgloader(list_num):
 
-    return "http://nepnep.iptime.org:8000/upload_files/" + str(School_Info.objects.get(title = schoolinfo_titleloader(list_num)).img)
-    
+    return "서버주소" + str(School_Info.objects.get(title = schoolinfo_titleloader(list_num)).img)
+    #카카오봇을 운영하고 있는 서버 주소를 입력해주세요. 어드민페이지를 통해 업로드한 이미지의 파일이름으로 가져옵니다. 
