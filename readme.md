@@ -28,13 +28,13 @@ https://github.com/plusfriend/auto_reply
 #### 4. 사양 및 사용된 라이브러리
 
 #### 기반
-*Python 3.6.3
-*Django Webframework
-*SQLlite3
+* Python 3.6.3
+* Django Webframework
+* SQLlite3
 
 #### 라이브러리
-*Beautiful Soup 4
-*Pillow
+* Beautiful Soup 4
+* Pillow
 
 
 ## 0\. 목차
