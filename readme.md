@@ -12,17 +12,17 @@
 #### 1. Django 웹프레임워크 사용법
 
 https://tutorial.djangogirls.org/ko/
-    (Django 웹프레임워크 사용법을 한번 보고 오시는 걸 추천합니다.)
+(Django 웹프레임워크 사용법을 한번 보고 오시는 걸 추천합니다.)
 
 #### 2. Python
 
 https://wikidocs.net/book/1
-    (Python 언어에 대한 기본적인 이해를 요구합니다.)
+(Python 언어에 대한 기본적인 이해를 요구합니다.)
 
 #### 3. 카카오톡 자동응답
 
 https://github.com/plusfriend/auto_reply
-    (카카오톡 자동응답설정 하는 법을 숙지해주세요.)
+(카카오톡 자동응답설정 하는 법을 숙지해주세요.)
     
     
 #### 4. 사양 및 사용된 라이브러리
