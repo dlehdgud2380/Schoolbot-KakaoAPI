@@ -27,7 +27,7 @@ https://github.com/plusfriend/auto_reply
     
 #### 4. 사양 및 사용된 라이브러리
 
-#### 사양
+#### 기반
 Python 3.6.3
 Django Webframework
 SQLlite3
