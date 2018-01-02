@@ -24,8 +24,7 @@ urlpatterns =  [
     url(r'^keyboard/', yhbot_views.keyboard, name = 'keyboard'),
     url(r'^message', yhbot_views.answer, name = 'message'),
     url(r'^meal_parser/', yhbot_views.meal_parser, name = 'meal'),
-    url(r'^img/(?P<pk>[0-9]+)/$',
-        yhbot_views.schoolinfo_imgloader, name = 'school_info'),
+    url(r'^img/(?P<pk>[0-9]+)/$', yhbot_views.schoolinfo_imgloader, name = 'school_info'),
 ]
 
 urlpatterns += static('upload_files', document_root=settings.MEDIA_ROOT)

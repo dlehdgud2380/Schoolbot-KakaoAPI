@@ -11,7 +11,7 @@ import re
 
 url_educationoffice = ''#예를 들어 서울이면 stu.sen.go.kr
 schulCode = ''#학교코드
-chulCrseScCode =  ''# 1 = 유치원, 2 =초등학교, 3 = 중학교, 4 = 고등학교
+schulCrseScCode =  ''# 1 = 유치원, 2 =초등학교, 3 = 중학교, 4 = 고등학교
 schulKndScCode =  ''# 01 = 유치원, 02 = 초등학교, 03 = 중학교, 04 = 고등학교
 
 def keyboard(request):#자동응답 버튼입니다
@@ -323,13 +323,13 @@ def meal_parser():
 
         data = "\n#중식정보\n\n"+ lunch + "\n\n----------------------------\n\n#석식정보\n\n" + dinner
 
-return (data)
+    return (data)
 
 
 #나이스에서 해당하는 학교의 일정 정보를 크롤링 해옵니다.
 def schoolschedule_parser():
 
-    url = 'http://' + url_educationoffice + '/sts_sci_md00_001.do?schulCode='+ schulCode +'&schulCrseScCode='+ schulCrseScCode +'&schulKndScCode=' + schulKndScCode
+    url = 'http://' + url_educationoffice + '/sts_sci_sf01_001.do?schulCode='+ schulCode +'&schulCrseScCode='+ schulCrseScCode +'&schulKndScCode=' + schulKndScCode
     with urlopen(url) as resp:
         html = resp.read()
         
@@ -344,10 +344,7 @@ def schoolschedule_parser():
         if text.strip():
             info.append(text)
 
-    num = 0
-    for text in info:        
-        return(info[num])
-        num = num + 1
+    return (info)
 
 # schoolschedule_parser() 함수의 리턴값을 가져와 오늘의 급식정보만 정규식을 통해 가공합니다.
 def schoolschedule_today():
@@ -402,5 +399,5 @@ def schoolinfo_loader(list_num):
 # 가정통신문 사진을 불러옴
 def schoolinfo_imgloader(list_num):
 
-    return "서버주소" + str(School_Info.objects.get(title = schoolinfo_titleloader(list_num)).img)
-    #카카오봇을 운영하고 있는 서버 주소를 입력해주세요. 어드민페이지를 통해 업로드한 이미지의 파일이름으로 가져옵니다. 
+    return ''+ '/upload_files' + str(School_Info.objects.get(title = schoolinfo_titleloader(list_num)).img)
+    #카카오봇을 운영하고 있는 서버 주소를 입력해주세요. 어드민페이지를 통해 업로드된 이미지의 파일이름으로 가져옵니다. 
