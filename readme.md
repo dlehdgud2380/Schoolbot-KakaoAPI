@@ -167,6 +167,11 @@ python3 manage.py createsuperuser
 응용을 한다면 comment에 google docs 설문지링크를 달아 가정통신문 신청서를 작성하게 할 수 있습니다.
 
 
+이 카카오톡 알림 서비스 관련으로 관심있으신 분은 이메일이나 Telegram 주시기 바랍니다.
+e-mail: dlehdgud2380@gmail.com
+Telegram: kigomake
+
+
 
 
 
