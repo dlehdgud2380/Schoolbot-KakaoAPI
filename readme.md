@@ -168,9 +168,10 @@ python3 manage.py createsuperuser
 
 
 이 카카오톡 알림 서비스 관련으로 관심있으신 분은 이메일이나 Telegram 주시기 바랍니다.
+```
 e-mail: dlehdgud2380@gmail.com
 Telegram: kigomake
-
+```
 
 
 
