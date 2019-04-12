@@ -60,9 +60,9 @@ pip3 install -r requirements.txt
 
 pip3 install django Pillow bs4
 ```
-django: 봇 서버를 구동시켜주는 파이썬 웹프레임워크
-Pillow: 파이썬에서 이미지 처리를 해주는 라이브러리
-bs4: BeautifulSoup 웹 파싱 라이브러리
+* django: 봇 서버를 구동시켜주는 파이썬 웹프레임워크
+* Pillow: 파이썬에서 이미지 처리를 해주는 라이브러리
+* bs4: BeautifulSoup 웹 파싱 라이브러리
 **※구동에 필수 라이브러리입니다. 미설치시 서버구동이 안됩니다.**
 
 
