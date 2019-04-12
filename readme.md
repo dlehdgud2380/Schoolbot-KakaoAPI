@@ -58,7 +58,7 @@ https://github.com/plusfriend/auto_reply
 pip3 install -r requirements.txt 
 (위 명령어로 설치안될 경우 아래 명령어로 설치)
 
-pip3 install django && pip3 install Pillow && pip3 install bs4
+pip3 install django Pillow bs4
 ```
 django: 봇 서버를 구동시켜주는 파이썬 웹프레임워크
 Pillow: 파이썬에서 이미지 처리를 해주는 라이브러리
