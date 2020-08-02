@@ -1,6 +1,6 @@
 # 카카오플러스 학교정보 자동응답봇
 
-![](https://scontent-icn1-1.xx.fbcdn.net/v/t31.0-8/21427425_1830905700554575_1288293878148381013_o.png?oh=cb4b0e773515078a5be41fcb25bd5826&oe=5AF884D0)
+![](https://scontent-ssn1-1.xx.fbcdn.net/v/t31.0-8/21427425_1830905700554575_1288293878148381013_o.png?_nc_cat=102&_nc_sid=dd9801&_nc_ohc=ZODtB3d6hn8AX9NuU0w&_nc_ht=scontent-ssn1-1.xx&oh=6556a8af35be8ee7ff93741f2f126d62&oe=5F4DDBB0)
 
 영훈앱2.0 개선 및 마무리를 목표로 하여 제작한 파이썬자동응답봇입니다.
 
